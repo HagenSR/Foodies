@@ -12,4 +12,32 @@
         <td>{{bmi}}</td>
     </tr>
 </table>
+<!-- bmi calculation -->
+
+<p>According to your BMI, you are {{bmiResults}}</p>
+
+
+<h2>Lifestyle Profile</h2>
+<p>You smoke: {{smoke}} per day</p>
+<p>You exercise: {{exercise}} times per week</p>
+<p>You drink: {{drink}} alcoholic drinks per week</p>
+
+<h2>Your Health</h2>
+<!-- Source: https://tobaccocontrol.bmj.com/content/14/5/315 -->
+<p *ngIf="smoke > 0; else elseSmoke">Smoking even one cigarrette a day significantly increases your risk of dying from ischaemic heart disease.</p>
+<ng-template #elseSmoke>Good job not smoking!</ng-template>
+
+<p *ngIf="exercise < 3; else elseExercise">It's recommended to exercise at least 3 times a week</p>
+<ng-template #elseExercise><p>Good job exercising frequently!</p></ng-template>
+
+<div *ngIf="sex.localeCompare('female') == 0">
+    <p *ngIf="drink > 7">It's recommended for females to not drink more than 7 alcoholic drinks each week</p>
+    <p *ngIf="drink <= 7 ">Good job regulating your alcohol intake</p>
+</div>
+<div *ngIf="sex.localeCompare('male') == 0">
+    <p *ngIf="drink > 14">It's recommended for males to not drink more than 14 alcoholic drinks each week</p>
+    <p *ngIf="drink <= 14 ">Good job regulating your alcohol intake</p>
+</div>
+
+
 
