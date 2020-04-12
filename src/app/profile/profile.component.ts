@@ -9,7 +9,7 @@ export class ProfileComponent implements OnInit {
 
   sex = "female"
 
-  weight = 145 //default values till profile created from sign in.
+  weight =145;//default values till profile created from sign in.
   height = 66
   bmi = Math.round( (703 * this.weight / Math.pow(this.height,2)) * 10 ) / 10 //Shenanigans because round functions rounds to integer
   bmiResults = ""

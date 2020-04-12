@@ -1,12 +1,34 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-3">Foodies App</h1>
-    </div>
+
+
+<div *ngIf="!user" id="welcome">
+  <h2>Welcome <span class="badge badge-secondary">Foodies</span></h2>
+  <div class="container welcbtn">
+    
+    <button class="btn btn-dark btn-lg" type="button"  (click)="signIn()">Sign  In</button>
+   
+    <button class="btn btn-dark btn-lg" type="button"  (click)="signUp()">Sign Up</button>
+  </div>
+  <h1>Lets Help you track your nutrition</h1>
 </div>
-<nav class="nav justify-content-center ">
-  <a class="nav-link active" routerLink="/landingpage">Home</a>
-  <a class="nav-link active" href="#">Food Tracker</a>
-  <a class="nav-link active" href="#">Favorite Foods</a>
-  <a class="nav-link active" routerLink="/profile">Profile</a>
-</nav>
-<router-outlet></router-outlet>
+
+<div class="container" *ngIf="user">
+
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+          <h1 class="display-3">Foodies App</h1>
+      </div>
+      
+  </div>
+
+
+  <div>Welcome: {{user?.displayName}}</div>
+  <nav class="nav justify-content-center ">
+    <a class="nav-link active" routerLink="/landingpage">Home</a>
+    <a class="nav-link active" href="#">Food Tracker</a>
+    <a class="nav-link active" href="#">Favorite Foods</a>
+    <a class="nav-link active" routerLink="/profile">Profile</a>
+    <button class="btn btn-dark btn-lg" type="button"  (click)="signOut()">Sign Out</button>
+  </nav>
+  </div> 
+
+ <router-outlet></router-outlet>
