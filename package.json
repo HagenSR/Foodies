@@ -19,11 +19,17 @@
     "@angular/platform-browser": "~9.0.6",
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
+<<<<<<< Updated upstream
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
     "node.js": "0.0.1-security",
+=======
+    "@types/mongoose": "^5.7.10",
+    "bootstrap": "^4.4.1",
+    "firebase": "^7.14.0",
+>>>>>>> Stashed changes
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -33,9 +39,9 @@
     "@angular/cli": "~9.0.6",
     "@angular/compiler-cli": "~9.0.6",
     "@angular/language-service": "~9.0.6",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.12.35",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
