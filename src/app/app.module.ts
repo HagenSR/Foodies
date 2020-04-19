@@ -2,18 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
 import{FormsModule,ReactiveFormsModule} from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FoodService } from './food.service';
+import { SearchComponent } from './search/search.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-
 import { environment } from 'src/environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
+import {FoodCardComponent} from './food-card/food-card.component';
 import { AuthenticationService } from './auth/authentication.service';
 import { AuthGuard } from './auth/auth.guard';
 
@@ -28,11 +29,16 @@ const appRoutes: Routes = [
  
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    SearchComponent,
     LandingpageComponent,
+    ProfileComponent,
+    SignInComponent,
+    SignUpComponent,
+    SearchComponent,
+    FoodCardComponent,
     ProfileComponent,
     SignInComponent,
     SignUpComponent
@@ -51,7 +57,7 @@ const appRoutes: Routes = [
     AngularFirestoreModule
 
   ],
-  providers: [AuthenticationService],
+  providers: [FoodService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

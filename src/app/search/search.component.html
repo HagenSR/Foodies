@@ -1,0 +1,7 @@
+<input #box>
+<button class = 'btn btn-primary' (click) = "search(box.value)"></button>
+<div class = "row row-cols-2 row-cols-md-3">
+<div *ngFor = "let food of list">
+    <app-food-card [obj] = food></app-food-card>
+</div>
+</div>

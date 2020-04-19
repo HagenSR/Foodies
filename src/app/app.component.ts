@@ -25,6 +25,9 @@ export class AppComponent {
   signIn(){
     this.route.navigate(['signin']);
   }
+  SearchLn(){
+    this.route.navigate(['srch']);
+  }
   signOut(){
     this.auth.logOut();
     this.route.navigate(['signin']);
