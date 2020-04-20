@@ -17,6 +17,8 @@ import { AngularFireModule } from '@angular/fire';
 import {FoodCardComponent} from './food-card/food-card.component';
 import { AuthenticationService } from './auth/authentication.service';
 import { AuthGuard } from './auth/auth.guard';
+import { FoodCardSmallComponent } from './food-card-small/food-card-small.component';
+import { TrackComponent } from './track/track.component';
 
 
 
@@ -25,8 +27,10 @@ const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent},
   { path: 'profile', component: ProfileComponent },
   {path : 'signin', component:SignInComponent },
-  {path : 'signup', component:SignUpComponent}
- 
+  {path : 'signup', component:SignUpComponent},
+  {path : 'moreInfo/:NDB_No',component: FoodCardComponent},
+  { path: 'srch', component: SearchComponent},
+  {path: 'track', component: TrackComponent}
 ];
 
 @NgModule({
@@ -41,14 +45,16 @@ const appRoutes: Routes = [
     FoodCardComponent,
     ProfileComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    FoodCardSmallComponent,
+    TrackComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(
       appRoutes,
-       { enableTracing: true } // <-- debugging purposes only
+       { enableTracing: false } // <-- debugging purposes only
     ),
     FormsModule,
     ReactiveFormsModule,

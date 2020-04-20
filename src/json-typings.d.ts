@@ -1,6 +1,4 @@
-import {Food} from './app/food';
-
 declare module "*.json" {
-    const value: Food[];
+    const value: any[];
     export default value;
   }
