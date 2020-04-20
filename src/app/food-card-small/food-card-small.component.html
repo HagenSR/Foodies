@@ -1,0 +1,20 @@
+<div class='card' style="width: 22rem;">
+    <div class="card-header">
+        <h3>{{obj.Shrt_Desc}}</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Calories: {{obj.Cal}}</li>
+            <li class="list-group-item">Protein: {{obj.Protein}}</li>
+            <li class="list-group-item">Carbs: {{obj.Carbs}}</li>
+            <li class="list-group-item">Fiber: {{obj.Fiber}}</li>
+            <li class="list-group-item">Water: {{obj.Water}}</li>
+            <li class="list-group-item">Sugar: {{obj.Sugar}}</li>
+            <li class="list-group-item">Gram Weight: {{obj.GmWt}}</li>
+            <li class="list-group-item">Weight Description: {{obj.GmWtDesc}}</li>
+        </ul>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <button class =  "btn btn-primary" (click) = 'Add()'>Add to Todays Foods</button>
+        <button class = "btn btn-secondary" (click) = 'View()'>View more Information</button>
+    </div>
+    </div>

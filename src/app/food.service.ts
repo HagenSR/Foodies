@@ -1,53 +1,105 @@
 
-import { OnInit } from '@angular/core';
+import { OnInit} from '@angular/core';
 import sdf from '../../data.json';
+import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase';
+import { Observable, of} from 'rxjs';
 
 
-export class FoodService implements OnInit{
+export class FoodService implements OnInit {
 
-    //LIST: any = sdf;
-    public LIST:  any = sdf;
-    
+  //LIST: any = sdf;
+  public LIST: any = sdf;
+  dte: string;
 
-  constructor() {
 
-   }
+  constructor(private db: AngularFirestore) {
+
+  }
   ngOnInit(): void {
+
   }
 
-  
 
-   find(desc : string): any[] {
-    let regexp = new RegExp('/'+desc+'/');
-    let rtn : any[] = [];
+
+  find(desc: string): Observable<any[]> {
+    let rtn: any[] = [];
     this.LIST.forEach(element => {
       var x = JSON.parse(JSON.stringify(element));
-      //console.log(element)
-      if((x.Shrt_Desc.includes(desc.toUpperCase()))){
+      if ((x.Shrt_Desc.includes(desc.toUpperCase()))) {
         rtn.push(x);
       }
     });
-    return rtn;
+    return of(rtn);
   }
 
 
-/* 
-finds a JSON food object based on its name, using REGEX
-*/
+  getById(id: string): Observable<any> {
+    let rtn: any;
+    this.LIST.forEach(element => {
+      var x = JSON.parse(JSON.stringify(element));
+      if (x.NDB_No == id) {
+        rtn = x;
+      }
+    });
+    return of(rtn)
+  }
 
-//  async find({desc}) : Promise<Ifood>{
-//     var db = connection;
-//     db.on('error', console.error.bind(console, 'connection error:'));
-//     db.once('open', function () {
-//         var model = _model("abbrev", FoodSchema, "abbrev");
-//         model.find({ Shrt_Desc: { $regex: input.toUpperCase(), $options: 'i' } },function(err,docs){
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                return docs;
-//             }
-//         }).limit(25);
-//     });
-// }
+  addToUserFoods(id: number, Email: string) {
+    let date: Date = new Date();
+    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
+    var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
+    docref.get().subscribe(doc => {
+      if (!doc.exists) {
+        docref.set({
+          'FoodIDS': [id]
+        })
+      }
+      else {
+        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) })
+      }
+    })
+
+  }
+
+  getUserFoods(Email: string) : Promise<number[]> {
+    let emptyArray: number[];
+    let date: Date = new Date();
+    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
+    var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          emptyArray = doc.data().FoodIDs
+          console.log("Here")
+          resolve(emptyArray)
+        } else {
+          console.log("No such document!");
+        }
+      }
+      )
+    )
+  }
+
+
+
+  /* 
+  finds a JSON food object based on its name, using REGEX
+  */
+
+  //  async find({desc}) : Promise<Ifood>{
+  //     var db = connection;
+  //     db.on('error', console.error.bind(console, 'connection error:'));
+  //     db.once('open', function () {
+  //         var model = _model("abbrev", FoodSchema, "abbrev");
+  //         model.find({ Shrt_Desc: { $regex: input.toUpperCase(), $options: 'i' } },function(err,docs){
+  //             if (err) {
+  //                 console.log(err);
+  //             } else {
+  //                return docs;
+  //             }
+  //         }).limit(25);
+  //     });
+  // }
 
 }

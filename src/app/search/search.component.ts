@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FoodService} from '../food.service';
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -19,12 +20,12 @@ export class SearchComponent implements OnInit {
      console.log(value) }
 
   search(value : string){
-    console.log(value)
-    this.list = this.fd.find(value);
+    this.fd.find(value).subscribe(elem => this.list = elem);
+    console.log(this.list.length)
   }
 
   ngOnInit(): void {
-    console.log("Here")
+   
   }
 
 }
