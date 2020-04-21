@@ -25,10 +25,11 @@
   <div>Welcome: {{user?.displayName}}</div>
   <nav class="nav justify-content-center ">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
-    <a class="nav-link active" href="#">Food Tracker</a>
+    <a class="nav-link active" href="/track">Food Tracker</a>
     <a class="nav-link active" href="#">Favorite Foods</a>
     <a class="nav-link active" routerLink="/profile">Profile</a>
     <a class="nav-link active" (click)="signOut()">Sign Out</a>
+    <button class="btn btn-dark btn-lg" type="button"  (click)="SearchLn()">Search</button>
   </nav>
   </div> 
 
