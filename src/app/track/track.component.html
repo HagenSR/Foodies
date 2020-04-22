@@ -1,5 +1,6 @@
 <div class = 'container'>
-    <table class="table table-borderless table-dark">
+  <h1>Foods Eaten on {{dte}}</h1>
+    <table class="table table-borderless">
         <thead>
             <tr>
               <th scope="col">Nutrient Name</th>
@@ -64,3 +65,10 @@
         </tbody>
       </table>
 </div>
+<div id = box>
+  <div class = "card-columns">
+  <div *ngFor = "let food of list | slice:0:40;">
+      <app-food-card-small [obj] = food></app-food-card-small>
+  </div>
+  </div>
+  </div>

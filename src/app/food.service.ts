@@ -1,9 +1,9 @@
 
-import { OnInit} from '@angular/core';
+import { OnInit } from '@angular/core';
 import sdf from '../../data.json';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase';
-import { Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 export class FoodService implements OnInit {
@@ -52,7 +52,7 @@ export class FoodService implements OnInit {
     docref.get().subscribe(doc => {
       if (!doc.exists) {
         docref.set({
-          'FoodIDS': [id]
+          'FoodIDs': [id]
         })
       }
       else {
@@ -62,16 +62,45 @@ export class FoodService implements OnInit {
 
   }
 
-  getUserFoods(Email: string) : Promise<number[]> {
+  getUserFoods(Email: string, dte: string): Promise<number[]> {
     let emptyArray: number[];
-    let date: Date = new Date();
-    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
     var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
           emptyArray = doc.data().FoodIDs
           console.log("Here")
+          resolve(emptyArray)
+        } else {
+          console.log("No such document!");
+        }
+      }
+      )
+    )
+  }
+
+  addUserFav(Email: string, FoodID : number){
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
+    docref.get().subscribe(doc => {
+      if (!doc.exists) {
+        docref.set({
+          'FavFoods': [FoodID]
+        })
+      }
+      else {
+        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
+      }
+    })
+
+  }
+
+  getFavoriteFoods(Email: string): Promise<number[]> {
+    let emptyArray: number[];
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          emptyArray = doc.data().FavFoods
           resolve(emptyArray)
         } else {
           console.log("No such document!");

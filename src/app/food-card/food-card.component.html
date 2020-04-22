@@ -1,4 +1,4 @@
-<div id = crd class='card' style="width: 50rem;">
+<div id=crd class='card' style="width: 55rem;">
     <div class="card-header">
         <h3>{{obj.Shrt_Desc}}</h3>
     </div>
@@ -11,9 +11,9 @@
             <li class="list-group-item">Fiber: {{obj.Fiber}}</li>
             <li class="list-group-item">Total Fat: {{obj.SatFat + obj.MonoFat + obj.PolyFat}}</li>
             <ul class="list-group list-group-flush">
-                <li id = itm class="list-group-item">Saturated Fat: {{obj.SatFat}}</li>
-                <li id = itm class="list-group-item">Monosaturated Fat: {{obj.MonoFat}}</li>
-                <li id = itm class="list-group-item">Polyunsaturated Fat: {{obj.PolyFat}}</li>
+                <li id=itm class="list-group-item">Saturated Fat: {{obj.SatFat}}</li>
+                <li id=itm class="list-group-item">Monosaturated Fat: {{obj.MonoFat}}</li>
+                <li id=itm class="list-group-item">Polyunsaturated Fat: {{obj.PolyFat}}</li>
             </ul>
             <li class="list-group-item">Sugar: {{obj.Sugar}}</li>
             <li class="list-group-item">Lipids: {{obj.Lipid}}</li>
@@ -25,10 +25,9 @@
             <li class="list-group-item">Cholesterol (mg): {{obj.CholestrlMG}}</li>
             <li class="list-group-item">Gram Weight: {{obj.GmWt}}</li>
             <li class="list-group-item">Weight Description: {{obj.GmWtDesc}}</li>
-          </ul>
-          <div class="btn-group" role="group" aria-label="Basic example">
-        <button class =  "btn btn-primary" (click) = 'Add()'>Add to Todays Foods</button>
-        <button class = "btn btn-secondary" (click) = 'Back()'>Back</button>
-    </div>
+        </ul>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-secondary" (click)='Back()'>Back</button>
+        </div>
 
     </div>

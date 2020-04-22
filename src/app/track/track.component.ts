@@ -31,16 +31,19 @@ export class TrackComponent implements OnInit {
   chol: number = 0;
 
   ids: number[];
+  list: any[] = [];
+  dte: string;
 
   constructor(private fds: FoodService, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(elem => this.fds.getUserFoods(elem.email).then(elem => {
+    let date: Date = new Date();
+    this.dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
+    this.afAuth.authState.subscribe(elem => this.fds.getUserFoods(elem.email, this.dte).then(elem => {
       console.log(elem)
       this.ids = elem;
       this.ids.forEach(element => {
         this.fds.getById(element.toString()).subscribe(jsn =>{
-          //console.log(jsn)
           this.water = Number(jsn.Water) + this.water
           this.cal = Number(jsn.Cal) + this.cal
           this.protein = Number(jsn.Protein) + this.protein
@@ -54,6 +57,8 @@ export class TrackComponent implements OnInit {
           this.mono = Number(jsn.MonoFat) + this.mono
           this.poly = Number(jsn.PolyFat) + this.poly
           this.chol = Number(jsn.CholestrlMG) + this.chol
+          this.list.push(jsn);
+          console.log(jsn)
         }
        
         )
