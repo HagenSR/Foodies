@@ -12,25 +12,24 @@
   <h1>Lets Help you track your nutrition</h1>
 </div>
 
-<div class="container" *ngIf="user">
+<div *ngIf="user">
 
   <div class="jumbotron jumbotron-fluid">
       <div class="container">
           <h1 class="display-3">Foodies App</h1>
+          <hr>
+          <div>Welcome: {{user?.displayName}}</div>
       </div>
-      
 </div>
 
-
-  <div>Welcome: {{user?.displayName}}</div>
   <nav class="nav justify-content-center ">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
     <a class="nav-link active" href="/track">Food Tracker</a>
     <a class="nav-link active" href="#">Favorite Foods</a>
     <a class="nav-link active" routerLink="/profile">Profile</a>
-    <a class="nav-link active" (click)="signOut()">Sign Out</a>
-    <button class="btn btn-dark btn-lg" type="button"  (click)="SearchLn()">Search</button>
+    <a class="nav-link active" href="#" (click)="signOut()">Sign Out</a>
+    <a class="nav-link active" href="#"(click)="SearchLn()">Search</a>
   </nav>
   </div> 
-
+  <br>
  <router-outlet></router-outlet>
