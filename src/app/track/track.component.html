@@ -1,74 +1,81 @@
-<div class = 'container'>
-  <h1>Foods Eaten on {{dte}}</h1>
-    <table class="table table-borderless">
-        <thead>
-            <tr>
-              <th scope="col">Nutrient Name</th>
-              <th scope="col">Ammount</th>
-            </tr>
-          </thead>
-        <tbody>
-          <tr>
-          </tr>
-          <tr>
-            <td>Water</td>
-            <td>{{water}}</td>
-          </tr>
-          <tr>
-            <td>Calories</td>
-            <td>{{cal}}</td>
-          </tr>
-          <tr>
-            <td>Protien</td>
-            <td>{{protein}}</td>
-          </tr>
-          <tr>
-            <td>Lipids</td>
-            <td>{{lipids}}</td>
-          </tr>
-          <tr>
-            <td>Carbs</td>
-            <td>{{carbs}}</td>
-          </tr>
-          <tr>
-            <td>Fiber</td>
-            <td>{{fiber}}</td>
-          </tr>
-          <tr>
-            <td>Sugar</td>
-            <td>{{sugar}}</td>
-          </tr>
-          <tr>
-            <td>Calcium (mg)</td>
-            <td>{{calcium}}</td>
-          </tr>
-          <tr>
-            <td>Sodium (mg)</td>
-            <td>{{sodium}}</td>
-          </tr>
-          <tr>
-            <td>Saturated Fat</td>
-            <td>{{sat}}</td>
-          </tr>
-          <tr>
-            <td>Monosaturated Fat</td>
-            <td>{{mono}}</td>
-          </tr>
-          <tr>
-            <td>PolySaturated Fat</td>
-            <td>{{poly}}</td>
-          </tr>
-          <tr>
-            <td>Cholosteral (MG)</td>
-            <td>{{chol}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class = container>
+<input #dateBox>
+<button class='btn btn-primary' (click)='Update()'>Select</button>
+<h6>Format date as '4-22-2020'</h6>
+<h1>Foods Eaten on {{dte}}</h1>
+<div *ngIf='show; else noFood'>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Nutrient Name</th>
+        <th scope="col">Ammount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      </tr>
+      <tr>
+        <td>Water</td>
+        <td>{{water}}</td>
+      </tr>
+      <tr>
+        <td>Calories</td>
+        <td>{{cal}}</td>
+      </tr>
+      <tr>
+        <td>Protien</td>
+        <td>{{protein}}</td>
+      </tr>
+      <tr>
+        <td>Lipids</td>
+        <td>{{lipids}}</td>
+      </tr>
+      <tr>
+        <td>Carbs</td>
+        <td>{{carbs}}</td>
+      </tr>
+      <tr>
+        <td>Fiber</td>
+        <td>{{fiber}}</td>
+      </tr>
+      <tr>
+        <td>Sugar</td>
+        <td>{{sugar}}</td>
+      </tr>
+      <tr>
+        <td>Calcium (mg)</td>
+        <td>{{calcium}}</td>
+      </tr>
+      <tr>
+        <td>Sodium (mg)</td>
+        <td>{{sodium}}</td>
+      </tr>
+      <tr>
+        <td>Saturated Fat</td>
+        <td>{{sat}}</td>
+      </tr>
+      <tr>
+        <td>Monosaturated Fat</td>
+        <td>{{mono}}</td>
+      </tr>
+      <tr>
+        <td>PolySaturated Fat</td>
+        <td>{{poly}}</td>
+      </tr>
+      <tr>
+        <td>Cholosteral (MG)</td>
+        <td>{{chol}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<div id = box>
-  <div class = "card-columns">
-  <div *ngFor = "let food of list | slice:0:40;">
-      <app-food-card-small [obj] = food></app-food-card-small>
+</div>
+  <div class="card-columns">
+    <div *ngFor="let food of list | slice:0:40;">
+      <app-food-card-small [obj]=food></app-food-card-small>
+    </div>
   </div>
-  </div>
-  </div>
+
+<ng-template #noFood>
+  <h1>No food eaten today!</h1>
+</ng-template>

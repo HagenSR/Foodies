@@ -22,12 +22,10 @@ export class FoodCardSmallComponent implements OnInit {
   }
 
   Add() {
-    let tmp; 
     this.afAuth.currentUser.then(tmps => this.fds.addToUserFoods(this.obj.NDB_No, tmps.email));
   }
 
   ngOnInit(): void {
-    this.afAuth.currentUser.then(tmps => this.fds.getFavoriteFoods(tmps.email).then(elem => console.log(elem)));
   }
 
 }
