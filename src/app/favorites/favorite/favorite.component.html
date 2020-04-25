@@ -1,0 +1,32 @@
+
+<div class="container">
+<div *ngIf="!showFavorites">
+<input type="text" placeholder="search favorite foods" #fav class="glyphicon glyphicon-search">
+<button class="btn btn-primary btn-sm" (click)="find(fav.value)">Search</button>
+<a>
+<div *ngFor="let item of list">
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Food</span></h6>{{item.Shrt_Desc}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Calories</span></h6>{{item.Cal}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Fiber</span></h6>{{item.Fiber}}</li>
+        </ul>
+        <button class="btn btn-primary btn-sm" routerLink="/favoritedetail/{{item.NDB_No}}"  type="submit">View Details</button>
+    </div>
+</div>
+</a>
+</div>
+
+<div *ngIf="showFavorites">
+  <button class="btn btn-primary btn-sm" (click)="displaySearch()">Search</button> 
+<div *ngFor="let list of favoriteList">
+  <h4>Your Favorites!!!</h4>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><h6><span class="badge badge-secondary">Food</span></h6>{{list.Shrt_Desc}}</li>
+    <li class="list-group-item"><h6><span class="badge badge-secondary">Calories</span></h6>{{list.Cal}}</li>
+    <li class="list-group-item"><h6><span class="badge badge-secondary">Fiber</span></h6>{{list.Fiber}}</li>
+  </ul>
+  <button class="btn btn-danger btn-sm" (click)="deleteFavoriteItem(list)">Delete</button>
+</div>
+</div>
+</div>

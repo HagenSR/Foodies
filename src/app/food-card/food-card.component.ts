@@ -27,8 +27,7 @@ export class FoodCardComponent implements OnInit {
 
   Add(){
     let id = this.route.snapshot.paramMap.get('NDB_No');
-    
-
+  
   }
 
 }

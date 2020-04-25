@@ -1,0 +1,24 @@
+
+<div class="container">
+<div *ngIf="favFood">
+  <h3>{{favFood.Shrt_Desc}}:Per Serving</h3>
+    <div class="card" style="width: 30rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Food</span></h6>{{favFood.Shrt_Desc}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Calories</span></h6>{{favFood.Cal}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Protein:</span></h6>{{favFood.Protein}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Carbs</span></h6>{{favFood.Carbs}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Sugar</span></h6>{{favFood.Sugar}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Lipids</span></h6>{{favFood.Lipids}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Calcium (mg)</span></h6>{{favFood.CalciumMG}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Sodium (mg)</span></h6>{{favFood.SodiumMG}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Saturated Fats </span></h6>{{favFood.SatFat}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Polyunsaturated Fats</span></h6>{{favFood.PolyFat}}</li>
+          <li class="list-group-item"><h6><span class="badge badge-secondary">Cholesterol (mg)</span></h6>{{favFood.CholestrlMG}}</li>
+        </ul>
+        <button class="btn btn-success btn-sm" (click)="addToFav(favFood.NDB_No)">Add to Favorites</button>
+        <button class="btn btn-primary btn-sm" (click)="back()">Meh not my favorite</button>
+    </div>
+</div>
+
+</div>
