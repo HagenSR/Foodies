@@ -88,7 +88,7 @@ docref.get().subscribe(doc => {
  
 }
 
-  getUserFoods(Email: string) : Promise<number[]> {
+  getUserFoods(Email: string, dte: string) : Promise<number[]> {
     let emptyArray: number[];
     var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
     return new Promise(resolve =>
