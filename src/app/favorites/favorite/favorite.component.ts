@@ -15,10 +15,18 @@ export class FavoriteComponent implements OnInit {
   list : any[]=[];
   favoriteList : any[]=[];
   showFavorites=true;
-  constructor(private foodService : FoodService, private location : Location, private router : Router, private afAuth : AngularFireAuth) { }
+  searchMore="";
+  startSearch="";
+  displaySearchbtn=true;
+  showDetail=false;
+  favDetail :any;
+  constructor(private foodService : FoodService, private location : Location, private router : Router, private afAuth : AngularFireAuth,
+    private activeRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getFavoriteFoodItems();
+  
+  
   }
 
   displaySearch(){
@@ -42,6 +50,7 @@ export class FavoriteComponent implements OnInit {
        numItem.forEach( item =>{
          this.foodService.getById(item.toString()).subscribe(data=>{
            this.favoriteList.push(data);
+           this.showSearch();
       
          })
        })
@@ -58,6 +67,7 @@ export class FavoriteComponent implements OnInit {
       console.log(this.favoriteList[i]);
       console.log(item);
     }
+    this.showSearch();
 
   }
     
@@ -71,5 +81,27 @@ export class FavoriteComponent implements OnInit {
     })
     
   }
- 
+  showSearch(){
+    if(this.favoriteList.length >= 1){
+      this.displaySearchbtn=true;
+      this.searchMore= "Click Here to Add More Food To Your Favorites List";
+    }else{
+      this.displaySearchbtn=false;
+      this.startSearch="Click Here To Add Your Favorite Foods";
+    }
+  }
+  back(){
+    this.showFavorites=true;
+  }
+ detail(item: any){
+   this.showDetail=true;
+  this.foodService.getById(item).subscribe(data =>{
+    this.favDetail=data
+  })
+  
+ }
+ backToFavorites(){
+   this.showDetail=false;
+   
+ }
 }

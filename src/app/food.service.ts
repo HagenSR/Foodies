@@ -126,10 +126,15 @@ docref.get().subscribe(doc => {
   }
 
   deleteFavFood(Email : string, food: string){
-    var doc = this.db.doc('/FavoriteFoods/' + Email);
-    let favItem : string[];
+    // var doc = this.db.doc('/FavoriteFoods/' + Email);
+    // let favItem : string[];
+    let docref=this.db.collection(`${Email}`).doc(`${food}`).delete().then(doc =>{
+      console.log(doc)
+    })
+    console.log(docref);
+    
   
-  doc.update({['FavFoods' + food]: firebase.firestore.FieldValue.delete()});
+  // doc.update({['FavFoods' + food]: firebase.firestore.FieldValue.delete()});
    
 
   }
