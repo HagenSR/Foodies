@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { FoodService } from '../food.service';
 import { element } from 'protractor';
 import { analytics } from 'firebase';
@@ -31,16 +31,52 @@ export class TrackComponent implements OnInit {
   chol: number = 0;
 
   ids: number[];
+  list: any[] = [];
+  dte: string;
+  show: boolean;
 
-  constructor(private fds: FoodService, private afAuth: AngularFireAuth) { }
+  constructor(private fds: FoodService, private afAuth: AngularFireAuth, private renderer: Renderer2) { }
+
+  @ViewChild('dateBox') input;
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(elem => this.fds.getUserFoods(elem.email).then(elem => {
-      console.log(elem)
+    let date: Date = new Date()
+    this.dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear()
+    this.getFoodInfo(this.dte)
+  }
+
+  ngAfterViewInit() {
+    this.renderer.setProperty(this.input.nativeElement, 'value', this.dte.toString());
+  }
+
+  Update() {
+    this.dte = this.input.nativeElement.value;
+    this.getFoodInfo(this.dte)
+  }
+
+  setToZero() {
+    this.water = 0;
+    this.cal  = 0;
+    this.protein = 0;
+    this.lipids = 0;
+    this.carbs = 0;
+    this.fiber = 0;
+    this.sugar = 0;
+    this.calcium = 0;
+    this.sodium  = 0;
+    this.sat = 0;
+    this.mono = 0;
+    this.poly  = 0;
+    this.chol = 0;
+    this.list = [];
+  }
+
+  getFoodInfo(dte: string){
+    this.setToZero()
+    this.afAuth.authState.subscribe(elem => this.fds.getUserFoods(elem.email, dte).then(elem => {
       this.ids = elem;
       this.ids.forEach(element => {
-        this.fds.getById(element.toString()).subscribe(jsn =>{
-          //console.log(jsn)
+        this.fds.getById(element.toString()).subscribe(jsn => {
           this.water = Number(jsn.Water) + this.water
           this.cal = Number(jsn.Cal) + this.cal
           this.protein = Number(jsn.Protein) + this.protein
@@ -54,14 +90,21 @@ export class TrackComponent implements OnInit {
           this.mono = Number(jsn.MonoFat) + this.mono
           this.poly = Number(jsn.PolyFat) + this.poly
           this.chol = Number(jsn.CholestrlMG) + this.chol
+          this.list.push(jsn);
+          this.show = true;
         }
-       
+
         )
       }
       )
     }
     )
     )
+    if(this.list.length == 0){
+      this.show = false;
+      console.log('no food eaten today!')
     }
+
+  }
 }
 

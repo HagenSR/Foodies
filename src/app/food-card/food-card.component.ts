@@ -13,12 +13,17 @@ export class FoodCardComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,private router: Router, private service: FoodService, private location : Location) { }
 
-  obj: any;
+  @Input() obj: any;
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('NDB_No');
-    console.log('this' + id)
-    this.obj = this.service.getById(id);
+    if(this.route.snapshot.paramMap.has('NDB_No')){
+      let id = this.route.snapshot.paramMap.get('NDB_No');
+      console.log('this' + id)
+      this.service.getById(id).subscribe(temp => this.obj = temp);
+      console.log('here' + this.obj.GmWt)
+    }
+  
+
   }
 
   Back() {

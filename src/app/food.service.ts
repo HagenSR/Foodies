@@ -1,5 +1,5 @@
 
-import { OnInit} from '@angular/core';
+import { OnInit } from '@angular/core';
 import sdf from '../../data.json';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
@@ -56,7 +56,7 @@ export class FoodService implements OnInit {
     docref.get().subscribe(doc => {
       if (!doc.exists) {
         docref.set({
-          'FoodIDS': [id]
+          'FoodIDs': [id]
         })
       }
       else {
@@ -90,14 +90,58 @@ docref.get().subscribe(doc => {
 
   getUserFoods(Email: string) : Promise<number[]> {
     let emptyArray: number[];
-    let date: Date = new Date();
-    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
     var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
           emptyArray = doc.data().FoodIDs
-          console.log("Here")
+          resolve(emptyArray)
+        } else {
+          console.log("No such document!");
+        }
+      }
+      )
+    )
+  }
+
+  getUserFoods2(Email: string, dte: string): Promise<number[]> {
+    let emptyArray: any;
+    var docref = this.db.doc('/FoodsEatenAlt/' + Email + '/' + dte);
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          emptyArray = doc.data()
+          resolve(emptyArray)
+        } else {
+          console.log("No such document!");
+        }
+      }
+      )
+    )
+  }
+
+  addUserFav(Email: string, FoodID : number){
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
+    docref.get().subscribe(doc => {
+      if (!doc.exists) {
+        docref.set({
+          'FavFoods': [FoodID]
+        })
+      }
+      else {
+        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
+      }
+    })
+
+  }
+
+  getFavoriteFoods(Email: string): Promise<number[]> {
+    let emptyArray: number[];
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          emptyArray = doc.data().FavFoods
           resolve(emptyArray)
         } else {
           console.log("No such document!");

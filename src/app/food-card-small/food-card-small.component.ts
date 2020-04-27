@@ -22,7 +22,6 @@ export class FoodCardSmallComponent implements OnInit {
   }
 
   Add() {
-    let tmp; 
     this.afAuth.currentUser.then(tmps => this.fds.addToUserFoods(this.obj.NDB_No, tmps.email));
   }
 

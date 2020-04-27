@@ -17,11 +17,10 @@ export class SearchComponent implements OnInit {
   private value = '';
   update(value: string) {
      this.value = value; 
-     console.log(value) }
+    }
 
   search(value : string){
     this.fd.find(value).subscribe(elem => this.list = elem);
-    console.log(this.list.length)
   }
 
   ngOnInit(): void {
