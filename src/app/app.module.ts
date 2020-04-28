@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
 import{FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +19,9 @@ import { AuthenticationService } from './auth/authentication.service';
 import { AuthGuard } from './auth/auth.guard';
 import { FoodCardSmallComponent } from './food-card-small/food-card-small.component';
 import { TrackComponent } from './track/track.component';
-
+import { FavoriteComponent } from './favorites/favorite/favorite.component';
+import { FavoritedetailComponent } from './favorites/favoritedetail/favoritedetail.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -30,7 +32,9 @@ const appRoutes: Routes = [
   {path : 'signup', component:SignUpComponent},
   {path : 'moreInfo/:NDB_No',component: FoodCardComponent},
   { path: 'srch', component: SearchComponent},
-  {path: 'track', component: TrackComponent}
+  {path: 'track', component: TrackComponent},
+  {path : 'favorite', component: FavoriteComponent},
+  {path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent}
 ];
 
 @NgModule({
@@ -47,7 +51,9 @@ const appRoutes: Routes = [
     SignInComponent,
     SignUpComponent,
     FoodCardSmallComponent,
-    TrackComponent
+    TrackComponent,
+    FavoriteComponent,
+    FavoritedetailComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    HttpClientModule
 
   ],
   providers: [FoodService, AuthenticationService],
