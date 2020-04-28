@@ -28,13 +28,13 @@ import {HttpClientModule} from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent},
   { path: 'profile', component: ProfileComponent },
-  {path : 'signin', component:SignInComponent },
-  {path : 'signup', component:SignUpComponent},
-  {path : 'moreInfo/:NDB_No',component: FoodCardComponent},
-  { path: 'srch', component: SearchComponent},
-  {path: 'track', component: TrackComponent},
-  {path : 'favorite', component: FavoriteComponent},
-  {path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent}
+  { path : 'signin', component:SignInComponent },
+  { path : 'signup', component:SignUpComponent },
+  { path : 'moreInfo/:NDB_No',component: FoodCardComponent },
+  { path: 'srch', component: SearchComponent },
+  { path: 'track', component: TrackComponent },
+  { path : 'favorite', component: FavoriteComponent },
+  { path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent }
 ];
 
 @NgModule({
@@ -45,11 +45,7 @@ const appRoutes: Routes = [
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
-    SearchComponent,
     FoodCardComponent,
-    ProfileComponent,
-    SignInComponent,
-    SignUpComponent,
     FoodCardSmallComponent,
     TrackComponent,
     FavoriteComponent,
