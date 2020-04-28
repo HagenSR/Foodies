@@ -9,6 +9,7 @@
   <h1>Lets Help you track your nutrition</h1>
 </div>
 
+<div>
 <div class="main_header" *ngIf="user">
   <div class="container welcbtn">
     <div class="container">
@@ -18,7 +19,8 @@
   </div>
 </div>
 </div>
-<br>
+
+  <br>
   <nav class="nav justify-content-center ">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
     <a class="nav-link active" href="/track">Food Tracker</a>
@@ -28,4 +30,5 @@
     <a class="nav-link active" href="#"(click)="SearchLn()">Search</a>
   </nav>
   <br>
+</div>
  <router-outlet></router-outlet>
