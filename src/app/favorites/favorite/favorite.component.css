@@ -1,0 +1,38 @@
+li{
+    border: 1px solid black;
+}
+.favItem{
+    width:80%;
+    align-content: center;
+    margin-left: 300px;
+}
+button{
+    margin-left: 20px;
+  
+}
+
+.listOfLists{
+    position: relative;;
+    background:yellow;
+  
+}
+
+.listOne{
+    top: 60px;;
+	left:60px;
+	bottom:10px;
+	right:10px;
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:red;
+   
+
+}
+
+.listOne{
+    background-image:url('/assets/welcomeImage.jpg');
+    color:black;
+    background-size:cover;
+ 
+} 

@@ -2,10 +2,8 @@
 
 <div *ngIf="!user" id="welcome">
   <h2>Welcome <span class="badge badge-secondary">Foodies</span></h2>
-  <div class="container welcbtn">
-    
+  <div class="container welcbtn">  
     <button class="btn btn-dark btn-lg" type="button"  (click)="signIn()">Sign  In</button>
-   
     <button class="btn btn-dark btn-lg" type="button"  (click)="signUp()">Sign Up</button>
   </div>
   <h1>Lets Help you track your nutrition</h1>
@@ -21,12 +19,15 @@
   </div>
 
 
-  <div>Welcome: {{user?.displayName}}</div>
+  <div>
+    <h3>Welcome<span class="badge badge-secondary">  {{user?.displayName}}</span></h3>
+  </div>
   <nav class="nav justify-content-center ">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
-    <a class="nav-link active" href="#">Food Tracker</a>
-    <a class="nav-link active" href="#">Favorite Foods</a>
+    <a class="nav-link active" href="/track">Food Tracker</a>
+    <a class="nav-link active" href="favorite">Favorite Foods</a>
     <a class="nav-link active" routerLink="/profile">Profile</a>
+    <button class="btn btn-dark btn-lg" type="button"  (click)="SearchLn()">Search</button>
     <button class="btn btn-dark btn-lg" type="button"  (click)="signOut()">Sign Out</button>
   </nav>
   </div> 

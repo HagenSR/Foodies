@@ -1,0 +1,71 @@
+
+<div class="container">
+<div id="search" *ngIf="!showFavorites">
+<input type="text" placeholder="search favorite foods" #fav class="glyphicon glyphicon-search">
+<button class="btn btn-primary btn-sm" (click)="find(fav.value)">Search</button>
+<button class="btn btn-primary btn-sm" (click)="back()">Back To Favorites</button>
+<a>
+<div class="itemList" *ngFor="let item of list">
+    <div class="card favItem" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h2><span class="badge badge-secondary">Food</span></h2>{{item.Shrt_Desc}}</li>
+          <li class="list-group-item"><h2><span class="badge badge-secondary">Calories</span></h2>{{item.Cal}}</li>
+        </ul>
+        <button class="btn btn-primary btn-sm" routerLink="/favoritedetail/{{item.NDB_No}}"  type="submit">View Details</button>
+    </div>
+</div>
+</a>
+</div>
+
+
+
+<div *ngIf="showFavorites">
+  <div *ngIf="displaySearchbtn">
+    <div class="alert alert-primary" role="alert">
+      <h3>Your Favorites</h3>
+    </div>
+   
+  <button class="btn btn-primary btn-sm" (click)="displaySearch()">{{searchMore}}</button> 
+</div>
+<div *ngIf="!displaySearchbtn">
+  <div class="alert alert-warning" role="alert">
+    <h4>Favorites List is Empty</h4>
+  </div>
+  
+  <button class="btn btn-primary btn-sm" (click)="displaySearch()">{{startSearch}}</button> 
+</div>
+
+<div class="listOfLists">
+<div *ngFor="let list of favoriteList">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><h3><span class="badge badge-secondary">Food</span></h3>{{list.Shrt_Desc}}</li>
+    <li class="list-group-item"><h3><span class="badge badge-secondary">Calories</span></h3>{{list.Cal}}</li>
+  </ul>
+  <button class="btn btn-danger btn-sm" (click)="deleteFavorite(list)">Delete</button>
+  <button class="btn btn-primary btn-sm"  (click)="detail(list.NDB_No)">View Details</button>
+</div>
+
+  <div class="listOne" *ngIf="showDetail && favDetail" >
+    <div class="alert alert-primary" role="alert">
+      <h2>Nutrition Facts:</h2>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item"><h2><span class="badge badge-secondary">Food Name</span></h2>{{favDetail.Shrt_Desc}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Calories</span></h4>{{favDetail.Cal}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Protein:</span></h4>{{favDetail.Protein}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Carbs</span></h4>{{favDetail.Carbs}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Sugar</span></h4>{{favDetail.Sugar}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Lipids</span></h4>{{favDetail.Lipid}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Calcium (mg)</span></h4>{{favDetail.CalciumMG}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Sodium (mg)</span></h4>{{favDetail.SodiumMG}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Saturated Fats </span></h4>{{favDetail.SatFat}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Polyunsaturated Fats</span></h4>{{favDetail.PolyFat}}</li>
+    <li class="list-group-item"><h4><span class="badge badge-secondary">Cholesterol (mg)</span></h4>{{favDetail.CholestrlMG}}</li> 
+
+  </ul>
+    <button class="btn btn-danger btn-sm" (click)="backToFavorites()">Back</button>
+  </div>
+</div>
+
+</div>
+</div>

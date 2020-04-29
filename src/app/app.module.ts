@@ -1,10 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
+<<<<<<< HEAD
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {FormsModule,
   ReactiveFormsModule} from '@angular/forms';
+=======
+import { NgModule, Component } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router'
+import{FormsModule,ReactiveFormsModule} from '@angular/forms';
+>>>>>>> 310be27dfb5ad4c9d6dce69060707f132ebd7739
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FoodService } from './food.service';
+import { SearchComponent } from './search/search.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
@@ -13,10 +21,16 @@ import { environment } from 'src/environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
+import {FoodCardComponent} from './food-card/food-card.component';
 import { AuthenticationService } from './auth/authentication.service';
 import { AuthGuard } from './auth/auth.guard';
 import { MostusedfoodsComponent } from './mostusedfoods/mostusedfoods.component';
 
+import { FoodCardSmallComponent } from './food-card-small/food-card-small.component';
+import { TrackComponent } from './track/track.component';
+import { FavoriteComponent } from './favorites/favorite/favorite.component';
+import { FavoritedetailComponent } from './favorites/favoritedetail/favoritedetail.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -26,33 +40,50 @@ const appRoutes: Routes = [
   {path : 'signin', component: SignInComponent },
   {path : 'signup', component: SignUpComponent}
 
+  {path : 'signin', component:SignInComponent },
+  {path : 'signup', component:SignUpComponent},
+  {path : 'moreInfo/:NDB_No',component: FoodCardComponent},
+  { path: 'srch', component: SearchComponent},
+  {path: 'track', component: TrackComponent},
+  {path : 'favorite', component: FavoriteComponent},
+  {path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent}
 ];
-
 
 @NgModule({
   declarations: [
     AppComponent,
+    SearchComponent,
     LandingpageComponent,
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
-    MostusedfoodsComponent
+    MostusedfoodsComponent,
+    SearchComponent,
+    FoodCardComponent,
+    ProfileComponent,
+    SignInComponent,
+    SignUpComponent,
+    FoodCardSmallComponent,
+    TrackComponent,
+    FavoriteComponent,
+    FavoritedetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(
       appRoutes,
-       { enableTracing: true } // <-- debugging purposes only
+       { enableTracing: false } // <-- debugging purposes only
     ),
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    HttpClientModule
 
   ],
-  providers: [AuthenticationService],
+  providers: [FoodService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

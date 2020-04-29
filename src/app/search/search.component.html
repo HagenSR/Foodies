@@ -1,0 +1,9 @@
+<input #box>
+<button class = 'btn btn-primary' (click) = "search(box.value)">Search</button>
+<div id = box>
+<div class = "card-columns">
+<div *ngFor = "let food of list | slice:0:40;">
+    <app-food-card-small [obj] = food></app-food-card-small>
+</div>
+</div>
+</div>
