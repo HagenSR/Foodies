@@ -9,27 +9,27 @@
   <h1>Lets Help you track your nutrition</h1>
 </div>
 
-<div class="container" *ngIf="user">
-
-  <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-          <h1 class="display-3">Foodies App</h1>
-      </div>
-      
+<div *ngIf="user">
+<div class="main_header" >
+  <div class="container welcbtn">
+    <div class="container">
+      <h1 class="display-3"><strong>Foodies App</strong></h1>
+      <hr>
+      <div>Welcome: {{user?.displayName}}</div>
   </div>
-
-
-  <div>
-    <h3>Welcome<span class="badge badge-secondary">  {{user?.displayName}}</span></h3>
-  </div>
-  <nav class="nav justify-content-center ">
+</div>
+</div>
+<div class="container">
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
-    <a class="nav-link active" href="/track">Food Tracker</a>
-    <a class="nav-link active" href="favorite">Favorite Foods</a>
+    <a class="nav-link active" routerLink="/track">Food Tracker</a>
+    <a class="nav-link active" routerLink="/favorite">Favorite Foods</a>
     <a class="nav-link active" routerLink="/profile">Profile</a>
-    <button class="btn btn-dark btn-lg" type="button"  (click)="SearchLn()">Search</button>
-    <button class="btn btn-dark btn-lg" type="button"  (click)="signOut()">Sign Out</button>
+    <a class="nav-link active" routerLink="/srch">Search</a>
+    <a class="nav-link active" href="#" (click)="signOut()">Signout</a>
   </nav>
-  </div> 
+  <br>
+</div>
 
+</div>
  <router-outlet></router-outlet>
