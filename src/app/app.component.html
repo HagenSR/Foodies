@@ -13,24 +13,23 @@
 <div class="main_header" >
   <div class="container welcbtn">
     <div class="container">
-      <h1 class="display-3">Foodies App</h1>
+      <h1 class="display-3"><strong>Foodies App</strong></h1>
       <hr>
       <div>Welcome: {{user?.displayName}}</div>
   </div>
 </div>
 </div>
-
-  <br>
-  <nav class="nav justify-content-center ">
+<div class="container">
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <a class="nav-link active" routerLink="/landingpage">Home</a>
     <a class="nav-link active" routerLink="/track">Food Tracker</a>
     <a class="nav-link active" routerLink="/favorite">Favorite Foods</a>
     <a class="nav-link active" routerLink="/profile">Profile</a>
-    <a class="nav-link active" href="#" (click)="signOut()">Signout</a>
     <a class="nav-link active" routerLink="/srch">Search</a>
-    <!-- <a class="nav-link active" href="#" (click)="signOut()">Sign Out</a>
-    <a class="nav-link active" href="#"(click)="SearchLn()">Search</a> -->
+    <a class="nav-link active" href="#" (click)="signOut()">Signout</a>
   </nav>
   <br>
+</div>
+
 </div>
  <router-outlet></router-outlet>
