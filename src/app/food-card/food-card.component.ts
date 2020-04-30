@@ -30,8 +30,7 @@ export class FoodCardComponent implements OnInit {
     this.location.back();
   }
 
-<<<<<<< HEAD
-=======
+
   Add(){
     let id = this.route.snapshot.paramMap.get('NDB_No');
     this.service.getById(id).subscribe( (data:any) =>{
@@ -39,6 +38,6 @@ export class FoodCardComponent implements OnInit {
     });
   
   }
->>>>>>> ddeb40aa254c6ff388b1a194af2e79267effdfa6
+
 
 }
