@@ -2,9 +2,9 @@
 import { OnInit } from '@angular/core';
 import sdf from '../../data.json';
 import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase';
+import { Observable, of } from 'rxjs';
 import { firestore } from 'firebase';
-import * as firebase from 'firebase';
-import { Observable, of} from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,18 +14,12 @@ export class FoodService implements OnInit {
   //LIST: any = sdf;
   public LIST: any = sdf;
   dte: string;
- 
- 
+  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth, private http: HttpClient) {
 
-  constructor(private db: AngularFirestore, private afAuth : AngularFireAuth, private http:HttpClient) {
-  
   }
   ngOnInit(): void {
 
   }
-
-
-
   find(desc: string): Observable<any[]> {
     let rtn: any[] = [];
     this.LIST.forEach(element => {
@@ -67,28 +61,24 @@ export class FoodService implements OnInit {
   }
 
 
+  addUserFavoriteFood(Email: string, FoodID: string) {
+    let date: Date = new Date();
+    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
 
-addUserFavoriteFood(Email: string, FoodID: string){
-  let date: Date = new Date();
-  let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
-  var docref = this.db.doc('/FavoriteFoods/' + Email);
+    docref.get().subscribe(doc => {
+      if (!doc.exists) {
+        docref.set({
+          'FavFoods': [FoodID]
+        })
+      } else {
+        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
+      }
 
-docref.get().subscribe(doc => {
-    if (!doc.exists) {
-      docref.set({
-        'FavFoods': [FoodID]
-      })
-    } else {
-      docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
-    }
- 
-  })
+    })
+  }
 
- 
- 
-}
-
-  getUserFoods(Email: string, dte: string) : Promise<number[]> {
+  getUserFoods(Email: string, dte: string): Promise<number[]> {
     let emptyArray: number[];
     var docref = this.db.doc('/FoodsEaten/' + Email + '/date/' + dte);
     return new Promise(resolve =>
@@ -104,36 +94,6 @@ docref.get().subscribe(doc => {
     )
   }
 
-  getUserFoods2(Email: string, dte: string): Promise<number[]> {
-    let emptyArray: any;
-    var docref = this.db.doc('/FoodsEatenAlt/' + Email + '/' + dte);
-    return new Promise(resolve =>
-      docref.get().subscribe((doc) => {
-        if (doc.exists) {
-          emptyArray = doc.data()
-          resolve(emptyArray)
-        } else {
-          console.log("No such document!");
-        }
-      }
-      )
-    )
-  }
-
-  addUserFav(Email: string, FoodID : number){
-    var docref = this.db.doc('/FavoriteFoods/' + Email);
-    docref.get().subscribe(doc => {
-      if (!doc.exists) {
-        docref.set({
-          'FavFoods': [FoodID]
-        })
-      }
-      else {
-        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
-      }
-    })
-
-  }
 
   getFavoriteFoods(Email: string): Promise<number[]> {
     let emptyArray: number[];
@@ -151,36 +111,40 @@ docref.get().subscribe(doc => {
     )
   }
 
-  getUserFavoriteFoods(Email : string):Promise<string[]>{
+  getUserFavoriteFoods(Email: string): Promise<string[]> {
     let docref = this.db.doc('/FavoriteFoods/' + Email);
-    let favItem : string[];
-    return new Promise(resolve => docref.get().subscribe((doc) =>{
-      if(doc.exists){
-        favItem=doc.data().FavFoods
+    let favItem: string[];
+    return new Promise(resolve => docref.get().subscribe((doc) => {
+      if (doc.exists) {
+        favItem = doc.data().FavFoods
 
         console.log("Here")
         resolve(favItem)
         console.log(favItem);
-      }else{
+      } else {
         console.log("No Such Document");
       }
     }))
-    
+
 
   }
 
-  deleteFavFood(Email : string, food: string){
-    // var doc = this.db.doc('/FavoriteFoods/' + Email);
-    // let favItem : string[];
-    let docref=this.db.collection(`${Email}`).doc(`${food}`).delete().then(doc =>{
-      console.log(doc)
-    })
-    console.log(docref);
-    
-  
-  // doc.update({['FavFoods' + food]: firebase.firestore.FieldValue.delete()});
-   
+  RemoveUserFavoriteFood(Email: string, FoodID: string) {
+    let date: Date = new Date();
+    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
+    var docref = this.db.doc('/FavoriteFoods/' + Email);
 
+    docref.get().subscribe(doc => {
+      if (!doc.exists) {
+        docref.set({
+          'FavFoods': []
+        })
+        console.log("nothing to remove")
+      } else {
+        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayRemove(FoodID) })
+      }
+
+    })
   }
 
 
