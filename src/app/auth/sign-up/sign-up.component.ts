@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { FoodService } from 'src/app/food.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +13,7 @@ export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
   authError : any;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private auth:AuthenticationService, private route : Router) { }
+  constructor(private formBuilder: FormBuilder, private auth:AuthenticationService, private route : Router, private foodService: FoodService) { }
 
   ngOnInit(): void {
     this.auth.eventAuthError$.subscribe(data =>{
@@ -32,6 +33,10 @@ get f() { return this.registerForm.controls; }
 
 
 createUser(){
+  
+
   this.auth.createUser(this.registerForm.value);
+
+  this.foodService.addUserProfileInformation(this.registerForm.value["email"]);
 }
 }
