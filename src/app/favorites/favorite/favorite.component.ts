@@ -67,18 +67,19 @@ export class FavoriteComponent implements OnInit {
       console.log(this.favoriteList[i]);
       console.log(item);
     }
+    this.deleteFavoriteItem(item.NDB_No)
     this.showSearch();
 
   }
     
   }
-  deleteFavoriteItem(item : any){
+  deleteFavoriteItem(item : string){
     let userEmail : string;
-    let numItem : string[];
+    console.log(item)
     this.afAuth.authState.subscribe(data =>{
       userEmail= data.email;
-      this.foodService.deleteFavFood(userEmail,item);
-    });
+      this.foodService.RemoveUserFavoriteFood(userEmail,item)
+    })
     
   }
   showSearch(){

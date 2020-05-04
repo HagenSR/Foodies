@@ -33,16 +33,14 @@ import {HttpClientModule} from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent},
   { path: 'profile', component: ProfileComponent },
-  {path : 'signin', component: SignInComponent },
-  {path : 'signup', component: SignUpComponent},
-   {path : 'mostusedfoods', component: MostusedfoodsComponent}, 
-  {path : 'signin', component: SignInComponent },
-  {path : 'signup', component: SignUpComponent},
-  {path : 'moreInfo/:NDB_No', component: FoodCardComponent},
-  { path: 'srch', component: SearchComponent},
-  {path: 'track', component: TrackComponent},
-  {path : 'favorite', component: FavoriteComponent},
-  {path: 'favoritedetail/:NDB_No', component: FavoritedetailComponent}
+  { path : 'signin', component:SignInComponent },
+  { path : 'signup', component:SignUpComponent },
+  { path : 'moreInfo/:NDB_No',component: FoodCardComponent },
+  { path: 'srch', component: SearchComponent },
+  { path: 'track', component: TrackComponent },
+  { path : 'favorite', component: FavoriteComponent },
+  { path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent },
+  { path: 'mostusedfoods', component: MostusedfoodsComponent}
 ];
 
 @NgModule({
@@ -56,9 +54,6 @@ const appRoutes: Routes = [
     MostusedfoodsComponent,
     SearchComponent,
     FoodCardComponent,
-    ProfileComponent,
-    SignInComponent,
-    SignUpComponent,
     FoodCardSmallComponent,
     TrackComponent,
     FavoriteComponent,
