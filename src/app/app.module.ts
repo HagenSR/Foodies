@@ -1,14 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
-import {FormsModule,
-  ReactiveFormsModule} from '@angular/forms';
-=======
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'
-import{FormsModule,ReactiveFormsModule} from '@angular/forms';
->>>>>>> 310be27dfb5ad4c9d6dce69060707f132ebd7739
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoodService } from './food.service';
@@ -38,15 +34,15 @@ const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent},
   { path: 'profile', component: ProfileComponent },
   {path : 'signin', component: SignInComponent },
-  {path : 'signup', component: SignUpComponent}
-
-  {path : 'signin', component:SignInComponent },
-  {path : 'signup', component:SignUpComponent},
-  {path : 'moreInfo/:NDB_No',component: FoodCardComponent},
+  {path : 'signup', component: SignUpComponent},
+   {path : 'mostusedfoods', component: MostusedfoodsComponent}, 
+  {path : 'signin', component: SignInComponent },
+  {path : 'signup', component: SignUpComponent},
+  {path : 'moreInfo/:NDB_No', component: FoodCardComponent},
   { path: 'srch', component: SearchComponent},
   {path: 'track', component: TrackComponent},
   {path : 'favorite', component: FavoriteComponent},
-  {path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent}
+  {path: 'favoritedetail/:NDB_No', component: FavoritedetailComponent}
 ];
 
 @NgModule({

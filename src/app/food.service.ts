@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import { Observable, of} from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
+import { stringify } from 'querystring';
 
 
 export class FoodService implements OnInit {
@@ -46,7 +47,7 @@ export class FoodService implements OnInit {
         rtn = x;
       }
     });
-    return of(rtn)
+    return of(rtn);
   }
 
   addToUserFoods(id: number, Email: string) {
@@ -57,12 +58,12 @@ export class FoodService implements OnInit {
       if (!doc.exists) {
         docref.set({
           'FoodIDs': [id]
-        })
+        });
       }
       else {
-        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) })
+        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) });
       }
-    })
+    });
 
   }
 
@@ -77,12 +78,12 @@ docref.get().subscribe(doc => {
     if (!doc.exists) {
       docref.set({
         'FavFoods': [FoodID]
-      })
+      });
     } else {
-      docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
+      docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) });
     }
  
-  })
+  });
 
  
  
@@ -94,15 +95,19 @@ docref.get().subscribe(doc => {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FoodIDs
-          resolve(emptyArray)
+          emptyArray = doc.data().FoodIDs;
+          resolve(emptyArray);
+          console.log(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
+
+
+  
 
   getUserFoods2(Email: string, dte: string): Promise<number[]> {
     let emptyArray: any;
@@ -110,14 +115,14 @@ docref.get().subscribe(doc => {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data()
-          resolve(emptyArray)
+          emptyArray = doc.data();
+          resolve(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
   addUserFav(Email: string, FoodID : number){
@@ -126,12 +131,12 @@ docref.get().subscribe(doc => {
       if (!doc.exists) {
         docref.set({
           'FavFoods': [FoodID]
-        })
+        });
       }
       else {
-        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) })
+        docref.update({ FavFoods: firebase.firestore.FieldValue.arrayUnion(FoodID) });
       }
-    })
+    });
 
   }
 
@@ -141,14 +146,14 @@ docref.get().subscribe(doc => {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FavFoods
-          resolve(emptyArray)
+          emptyArray = doc.data().FavFoods;
+          resolve(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
   getUserFavoriteFoods(Email : string):Promise<string[]>{
@@ -156,15 +161,15 @@ docref.get().subscribe(doc => {
     let favItem : string[];
     return new Promise(resolve => docref.get().subscribe((doc) =>{
       if(doc.exists){
-        favItem=doc.data().FavFoods
+        favItem=doc.data().FavFoods;
 
-        console.log("Here")
-        resolve(favItem)
+        console.log("Here");
+        resolve(favItem);
         console.log(favItem);
       }else{
         console.log("No Such Document");
       }
-    }))
+    }));
     
 
   }
@@ -173,17 +178,21 @@ docref.get().subscribe(doc => {
     // var doc = this.db.doc('/FavoriteFoods/' + Email);
     // let favItem : string[];
     let docref=this.db.collection(`${Email}`).doc(`${food}`).delete().then(doc =>{
-      console.log(doc)
-    })
+      console.log(doc);
+    });
     console.log(docref);
-    
-  
   // doc.update({['FavFoods' + food]: firebase.firestore.FieldValue.delete()});
    
-
+ 
   }
-
-
+  deleteMostUsed(Email: string, food: string){
+    // var doc = this.db.doc('/FavoriteFoods/' + Email);
+    // let favItem : string[];
+    const docref = this.db.collection(`${Email}`).doc(`${food}`).delete().then(doc =>{
+      console.log(doc);
+    });
+    console.log(docref);
+  }
   /* 
   finds a JSON food object based on its name, using REGEX
   */
