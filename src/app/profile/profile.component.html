@@ -1,60 +1,88 @@
 
 <div class="container">
-<h1>Your Profile</h1>
-<h2>Body Profile</h2>
-<table class="table">
-    <tr>    
-        <th scope="col">Weight</th>
-        <th scope="col">Height</th>
-        <th scope="col">BMI</th>
-    </tr>
-    <tr>
-    
-        <td>{{weight}}</td>
-        <td>{{height}}</td>
-        <td>{{bmi}}</td>
-    </tr>
-</table>
-<!-- bmi calculation -->
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    Weight: <br>
-    <input type="text" formControlName="weightForm" required> <br>
-    Height: <br>
-    <input type="text" formControlName="heightForm" required> <br>
-    Smoke: <br>
-    <input type="text" formControlName="smokeForm" required> <br>
-    Exercise: <br>
-    <input type="text" formControlName="exerciseForm" required> <br>
-    Drink: <br>
-    <input type="text" formControlName="drinkForm" required> <br>
+    <h1>Your Profile</h1>
+    <table class="table">
+        <tr>    
+            <th scope="col">Weight</th>
+            <th scope="col">Height</th>
+            <th scope="col">BMI</th>
+        </tr>
+        <tr>
+        
+            <td>{{weight}}</td>
+            <td>{{height}}</td>
+            <td>{{bmi}}</td>
+        </tr>
+    </table>
+    <!-- bmi calculation -->
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        Weight in pounds: <br>
+        <input type="number" formControlName="weightForm"> <br>
+        <p class="alert alert-danger" *ngIf="weight == 0 || weight == null">Weight is not a valid number.</p>
 
-    <button type="submit">Submit</button>
-</form>
+        Height in inches: <br>
+        <input type="number" formControlName="heightForm"> <br>
+        <p class="alert alert-danger" *ngIf="height == 0 || height == null">Height is not a valid number.</p>
 
-<p>According to your BMI, you are {{bmiResults}}</p>
+        Sex: (Input "male" or "female") <br>
+        <input type="text" formControlName="sexForm" > <br>
+        <p class="alert alert-danger" *ngIf="sex != 'female' && sex != 'male'">Gender must be formatted exactly as male or female</p>
+
+        Cigarettes smoked a day: <br>
+        <input type="number" formControlName="smokeForm" > <br>
 
 
-<h2>Lifestyle Profile</h2>
-<p>You smoke: {{smoke}} per day</p>
-<p>You exercise: {{exercise}} times per week</p>
-<p>You drink: {{drink}} alcoholic drinks per week</p>
+        Times you exercise per week: <br>
+        <input type="number" formControlName="exerciseForm" > <br>
 
-<h2>Your Health</h2>
-<!-- Source: https://tobaccocontrol.bmj.com/content/14/5/315 -->
-<p *ngIf="smoke > 0; else elseSmoke">Smoking even one cigarrette a day significantly increases your risk of dying from ischaemic heart disease.</p>
-<ng-template #elseSmoke>Good job not smoking!</ng-template>
 
-<p *ngIf="exercise < 3; else elseExercise">It's recommended to exercise at least 3 times a week</p>
-<ng-template #elseExercise><p>Good job exercising frequently!</p></ng-template>
+        Alcoholic drinks per week: <br>
+        <input type="number" formControlName="drinkForm" > <br>
 
-<div *ngIf="sex == 'female'">
-    <p *ngIf="drink > 7">It's recommended for females to not drink more than 7 alcoholic drinks each week</p>
-    <p *ngIf="drink <= 7 ">Good job regulating your alcohol intake</p>
-</div>
-<div *ngIf="sex == 'male'">
-    <p *ngIf="drink > 14">It's recommended for males to not drink more than 14 alcoholic drinks each week</p>
-    <p *ngIf="drink <= 14 ">Good job regulating your alcohol intake</p>
-</div>
+
+        <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+    </form>
+
+    <p *ngIf="bmiResults != null">According to your BMI, you are {{bmiResults}}</p>
+    <p *ngIf="bmiResults == null">Error: Please check that height and weight were entered properly</p>
+
+
+    <h2>Lifestyle Profile</h2>
+    <p>You smoke {{smoke}} cigarettes per day</p>
+    <p>You exercise {{exercise}} times per week</p>
+    <p>You drink {{drink}} alcoholic drinks per week</p>
+
+    <h2>Your Health</h2>
+    <div class="row">
+        <div class="card" style="width: 18rem; margin: 10px">
+            <div class="card-body">
+                <p *ngIf="unhealthySmoke()">Smoking even one cigarrette a day significantly increases your risk of dying from ischaemic heart disease.</p>
+                <p *ngIf="!unhealthySmoke()">Good job on not smoking!</p>
+            </div>
+            
+        </div>
+        <div class="card" style="width: 18rem; margin: 10px">
+            <div class="card-body">
+                <p *ngIf="unhealthyExercise()">It's recommended to exercise at least 3 times a week</p>
+                <p *ngIf="!unhealthyExercise()">Good job exercising frequently!</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem; margin: 10px" *ngIf="sex == 'female'">
+            <div class="card-body">
+                <p *ngIf="drink > 7">It's recommended for females to not drink more than 7 alcoholic drinks each week</p>
+                <p *ngIf="drink <= 7 ">Good job regulating your alcohol intake</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem; margin: 10px" *ngIf="sex == 'male'">
+            <div class="card-body">
+                <p *ngIf="drink > 14">It's recommended for males to not drink more than 14 alcoholic drinks each week</p>
+                <p *ngIf="drink <= 14 ">Good job regulating your alcohol intake</p>
+            </div>
+        </div>
+    </div>
+
+
+
 
 </div>
 

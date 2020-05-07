@@ -13,7 +13,6 @@ import { of } from 'rxjs';
 export class ProfileComponent implements OnInit {
 
   @Input() informationArray: any[] = [];
-  //informationArray=[10,12];
 
   sex: string = "male";
   weight: number;
@@ -22,22 +21,22 @@ export class ProfileComponent implements OnInit {
   smoke: number;
   drink: number;
   bmi: number;
-  bmiResults: string = "AHHHHH";
+  bmiResults: string = "";
   
   
   profileForm = this.fb.group({
-    weightForm: [this.weight],
-    heightForm: [this.height],
-    smokeForm: [this.smoke],
-    exerciseForm: [this.exercise],
-    drinkForm: [this.drink],
+    weightForm: [this.weight, Validators.required],
+    heightForm: [this.height, Validators.required],
+    smokeForm: [this.smoke, Validators.required],
+    exerciseForm: [this.exercise, Validators.required],
+    drinkForm: [this.drink, Validators.required],
+    sexForm: [this.sex, Validators.required]
   });
   
 
   constructor(private fb: FormBuilder, private foodService: FoodService, private afAuth : AngularFireAuth) { }
 
   ngOnInit(): void {
-    //this.informationArray=[10,12];
     let userEmail : string;
     this.afAuth.authState.subscribe(data =>{
       this.foodService.getUserProfileInformation(data.email).then(data =>{
@@ -45,11 +44,6 @@ export class ProfileComponent implements OnInit {
         this.update();
       })
     })
-
-    
-
-    //this.informationArray = this.afAuth.currentUser.then(tmps => this.foodService.getUserProfileInformation(tmps.email));
-    //this.informationArray = this.foodService.getUserProfileInformation()
     
   }
 
@@ -58,22 +52,26 @@ export class ProfileComponent implements OnInit {
   }
 
   update() {
-
-
-    
-
-        //This is in the Async code because... async shenanigans
         //Note: informationArray = [sex, weight, height, smoke, exercise, drink]
         this.sex = this.informationArray[0];
         this.weight = this.informationArray[1];
         this.height = this.informationArray[2];
-        this.bmi = Math.round( (703 * this.weight / Math.pow(this.height,2)) * 10 ) / 10 //Shenanigans because round functions rounds to integer
+
+        if(this.height == 0 || this.height == null || this.weight == null || this.weight == 0){
+          this.bmi = null;
+        }
+        else{
+          this.bmi = Math.round( (703 * this.weight / Math.pow(this.height,2)) * 10 ) / 10 //Shenanigans because round functions rounds to integer
+        }
 
         this.smoke = this.informationArray[3];
         this.exercise = this.informationArray[4];
         this.drink = this.informationArray[5];
 
-        if (this.bmi < 18.5) {
+        if (this.bmi == null){
+          this.bmiResults = null;
+        }
+        else if (this.bmi < 18.5) {
           this.bmiResults = "underweight"
         }
         else if(this.bmi < 25) {
@@ -85,6 +83,7 @@ export class ProfileComponent implements OnInit {
         else if(this.bmi >= 30){
           this.bmiResults = "obese"
         }
+        
 
         this.profileForm = this.fb.group({
           weightForm: [this.weight],
@@ -92,12 +91,13 @@ export class ProfileComponent implements OnInit {
           smokeForm: [this.smoke],
           exerciseForm: [this.exercise],
           drinkForm: [this.drink],
+          sexForm: [this.sex]
         });
   }
   
 
   onSubmit() {
-
+    this.informationArray[0] = this.profileForm.value["sexForm"];
     this.informationArray[1] = this.profileForm.value["weightForm"];
     this.informationArray[2] = this.profileForm.value["heightForm"];
     this.informationArray[3] = this.profileForm.value["smokeForm"];
@@ -107,8 +107,14 @@ export class ProfileComponent implements OnInit {
     this.afAuth.authState.subscribe(data =>{
       of((this.foodService.editUserProfileInformation(data.email, this.informationArray))).subscribe(garbage => this.update())
     })
-    
+  }
 
+  unhealthySmoke() {
+    return this.smoke > 0;
+  }
+
+  unhealthyExercise() {
+    return this.exercise < 3;
   }
 
 }

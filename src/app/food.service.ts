@@ -154,12 +154,12 @@ export class FoodService implements OnInit {
 
     docref.get().subscribe(doc => {
       docref.set({
-        'Weight': [10],
-        'Height': [10],
-        'Smoke': [0],
-        'Exercise': [0],
-        'Drink': [0],
-        'Sex':["male"]
+        'Weight': 160,
+        'Height': 70,
+        'Smoke': 0,
+        'Exercise': 0,
+        'Drink': 0,
+        'Sex':"male"
       })
     })
   }
