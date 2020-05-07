@@ -20,8 +20,8 @@ export class FavoriteComponent implements OnInit {
   displaySearchbtn=true;
   showDetail=false;
   favDetail :any;
-  constructor(private foodService : FoodService, private location : Location, private router : Router, private afAuth : AngularFireAuth,
-    private activeRoute : ActivatedRoute) { }
+  constructor(private foodService: FoodService, private location : Location, private router : Router, private afAuth : AngularFireAuth,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getFavoriteFoodItems();
@@ -36,7 +36,7 @@ export class FavoriteComponent implements OnInit {
   find(value : string){
     this.showFavorites=false;
     this.foodService.find(value).subscribe(elem => this.list = elem);
-    console.log(this.list.length)
+    console.log(this.list.length);
   }
 
   getFavoriteFoodItems(){
@@ -47,13 +47,13 @@ export class FavoriteComponent implements OnInit {
       userEmail= data.email;
       this.foodService.getUserFavoriteFoods(userEmail).then(data =>{
         numItem=data;
-       numItem.forEach( item =>{
-         this.foodService.getById(item.toString()).subscribe(data=>{
-           this.favoriteList.push(data);
+       numItem.forEach( item => {
+        this.foodService.getById(item.toString()).subscribe(data=> {
+         this.favoriteList.push(data);
            this.showSearch();
       
-         })
-       })
+         });
+       });
    });
   });
 
@@ -97,8 +97,8 @@ export class FavoriteComponent implements OnInit {
  detail(item: any){
    this.showDetail=true;
   this.foodService.getById(item).subscribe(data =>{
-    this.favDetail=data
-  })
+    this.favDetail=data;
+  });
   
  }
  backToFavorites(){

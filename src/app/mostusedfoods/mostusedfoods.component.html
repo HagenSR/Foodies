@@ -1,0 +1,69 @@
+
+
+
+
+
+<div class="container">
+  <h3>Your most used food items</h3>
+  <div class="showdetails">
+  <div *ngFor="let list of dist">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><h3><span class="badge badge-secondary">Food</span></h3>{{list.Shrt_Desc}}</li> &nbsp; &nbsp;
+      <li class="list-group-item"><h3><span class="badge badge-secondary">Calories</span></h3>{{list.Cal}}</li>&nbsp; &nbsp;
+    </ul>
+   
+    <button class="btn btn-primary btn-sm"  (click)="detail(list.NDB_No)">View Details</button>
+  </div>
+</div>
+
+
+  <div class="listdetail" *ngIf="isDetail && viewDetail" >
+    <div class="alert alert-primary" role="alert">
+      <h2>Nutrition Facts:</h2>
+  </div>
+  
+   <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h2><span class="badge badge-secondary">Food Name</span></h2>{{viewDetail.Shrt_Desc}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Calories</span></h4>{{viewDetail.Cal}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Protein:</span></h4>{{viewDetail.Protein}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Carbs</span></h4>{{viewDetail.Carbs}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Sugar</span></h4>{{viewDetail.Sugar}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Lipids</span></h4>{{viewDetail.Lipid}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Calcium (mg)</span></h4>{{viewDetail.CalciumMG}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Sodium (mg)</span></h4>{{viewDetail.SodiumMG}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Saturated Fats </span></h4>{{viewDetail.SatFat}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Polyunsaturated Fats</span></h4>{{viewDetail.PolyFat}}</li>
+        <li class="list-group-item"><h4><span class="badge badge-secondary">Cholesterol (mg)</span></h4>{{viewDetail.CholestrlMG}}</li> 
+
+  </ul>
+    <button class="btn btn-danger btn-sm" (click)="back()">Back</button>
+  </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
