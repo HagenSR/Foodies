@@ -1,0 +1,26 @@
+
+.listdetail{
+    top: 60px;;
+	left:60px;
+	bottom:10px;
+	right:10px;
+    position:absolute;
+    width:400px;
+    height:200px;
+    background: purple;
+    float: right;
+    margin-left: 700px;
+    margin-top:415px ;
+   border-color: aqua; 
+   
+}
+
+.showdetails{
+    position: absolute;
+
+}
+h3{
+    text-align: justify;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:rgb(219, 12, 219);
+}

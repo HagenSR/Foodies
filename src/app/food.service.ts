@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { firestore } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
+import { stringify } from 'querystring';
 
 
 export class FoodService implements OnInit {
@@ -40,7 +41,7 @@ export class FoodService implements OnInit {
         rtn = x;
       }
     });
-    return of(rtn)
+    return of(rtn);
   }
 
   addToUserFoods(id: number, Email: string) {
@@ -51,12 +52,12 @@ export class FoodService implements OnInit {
       if (!doc.exists) {
         docref.set({
           'FoodIDs': [id]
-        })
+        });
       }
       else {
-        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) })
+        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) });
       }
-    })
+    });
 
   }
 
@@ -84,14 +85,15 @@ export class FoodService implements OnInit {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FoodIDs
-          resolve(emptyArray)
+          emptyArray = doc.data().FoodIDs;
+          resolve(emptyArray);
+          console.log(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
 
@@ -101,14 +103,14 @@ export class FoodService implements OnInit {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FavFoods
-          resolve(emptyArray)
+          emptyArray = doc.data().FavFoods;
+          resolve(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
   getUserFavoriteFoods(Email: string): Promise<string[]> {
@@ -118,8 +120,8 @@ export class FoodService implements OnInit {
       if (doc.exists) {
         favItem = doc.data().FavFoods
 
-        console.log("Here")
-        resolve(favItem)
+        console.log("Here");
+        resolve(favItem);
         console.log(favItem);
       } else {
         console.log("No Such Document");
@@ -146,8 +148,6 @@ export class FoodService implements OnInit {
 
     })
   }
-
-
   /* 
   finds a JSON food object based on its name, using REGEX
   */

@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+
+import { RouterModule, Routes } from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'
-import{FormsModule,ReactiveFormsModule} from '@angular/forms';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoodService } from './food.service';
@@ -17,6 +20,8 @@ import { AngularFireModule } from '@angular/fire';
 import {FoodCardComponent} from './food-card/food-card.component';
 import { AuthenticationService } from './auth/authentication.service';
 import { AuthGuard } from './auth/auth.guard';
+import { MostusedfoodsComponent } from './mostusedfoods/mostusedfoods.component';
+
 import { FoodCardSmallComponent } from './food-card-small/food-card-small.component';
 import { TrackComponent } from './track/track.component';
 import { FavoriteComponent } from './favorites/favorite/favorite.component';
@@ -34,7 +39,8 @@ const appRoutes: Routes = [
   { path: 'srch', component: SearchComponent },
   { path: 'track', component: TrackComponent },
   { path : 'favorite', component: FavoriteComponent },
-  { path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent }
+  { path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent },
+  { path: 'mostusedfoods', component: MostusedfoodsComponent}
 ];
 
 @NgModule({
@@ -45,6 +51,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
+    MostusedfoodsComponent,
+    SearchComponent,
     FoodCardComponent,
     FoodCardSmallComponent,
     TrackComponent,
