@@ -131,7 +131,6 @@ export class FoodService implements OnInit {
 
   RemoveUserFavoriteFood(Email: string, FoodID: string) {
     let date: Date = new Date();
-    let dte = (1 + date.getUTCMonth()).toString() + '-' + date.getDate().toString() + '-' + date.getFullYear();
     var docref = this.db.doc('/FavoriteFoods/' + Email);
 
     docref.get().subscribe(doc => {
