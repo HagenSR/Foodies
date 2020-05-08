@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { firestore } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
+import { stringify } from 'querystring';
 
 
 export class FoodService implements OnInit {
@@ -40,7 +41,7 @@ export class FoodService implements OnInit {
         rtn = x;
       }
     });
-    return of(rtn)
+    return of(rtn);
   }
 
   addToUserFoods(id: number, Email: string) {
@@ -51,12 +52,12 @@ export class FoodService implements OnInit {
       if (!doc.exists) {
         docref.set({
           'FoodIDs': [id]
-        })
+        });
       }
       else {
-        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) })
+        docref.update({ FoodIDs: firebase.firestore.FieldValue.arrayUnion(id) });
       }
-    })
+    });
 
   }
 
@@ -84,14 +85,15 @@ export class FoodService implements OnInit {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FoodIDs
-          resolve(emptyArray)
+          emptyArray = doc.data().FoodIDs;
+          resolve(emptyArray);
+          console.log(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
 
@@ -101,14 +103,14 @@ export class FoodService implements OnInit {
     return new Promise(resolve =>
       docref.get().subscribe((doc) => {
         if (doc.exists) {
-          emptyArray = doc.data().FavFoods
-          resolve(emptyArray)
+          emptyArray = doc.data().FavFoods;
+          resolve(emptyArray);
         } else {
           console.log("No such document!");
         }
       }
       )
-    )
+    );
   }
 
   getUserFavoriteFoods(Email: string): Promise<string[]> {
@@ -118,8 +120,8 @@ export class FoodService implements OnInit {
       if (doc.exists) {
         favItem = doc.data().FavFoods
 
-        console.log("Here")
-        resolve(favItem)
+        console.log("Here");
+        resolve(favItem);
         console.log(favItem);
       } else {
         console.log("No Such Document");
@@ -143,6 +145,59 @@ export class FoodService implements OnInit {
         docref.update({ FavFoods: firebase.firestore.FieldValue.arrayRemove(FoodID) })
       }
 
+    })
+  }
+
+  addUserProfileInformation(Email: string){
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+
+    docref.get().subscribe(doc => {
+      docref.set({
+        'Weight': 160,
+        'Height': 70,
+        'Smoke': 0,
+        'Exercise': 0,
+        'Drink': 0,
+        'Sex':"male"
+      })
+    })
+  }
+
+  getUserProfileInformation(Email: string): Promise<any[]>{
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+    let output: any[] = [];
+
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          output.push(doc.data().Sex)
+          output.push(doc.data().Weight)
+          output.push(doc.data().Height)
+          output.push(doc.data().Smoke)
+          output.push(doc.data().Exercise)
+          output.push(doc.data().Drink)
+          
+
+          resolve(output)
+        } else {
+          console.log("No such document!");
+        }
+      })
+    )
+  }
+
+  editUserProfileInformation(Email: string, newInfo: any[]){
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+
+    docref.get().subscribe(doc => {
+      docref.set({
+        'Sex': newInfo[0],
+        'Weight': newInfo[1],
+        'Height': newInfo[2],
+        'Smoke': newInfo[3],
+        'Exercise': newInfo[4],
+        'Drink': newInfo[5]
+      })
     })
   }
 

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "users-d0273": {
+      "hosting": {
+        "Foodies": [
+          "users-d0273"
+        ]
+      }
+    }
+  }
+}

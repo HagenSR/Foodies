@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Foodies",
+      "public": "dist/Foodies",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

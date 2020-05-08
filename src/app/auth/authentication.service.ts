@@ -24,21 +24,24 @@ export class AuthenticationService {
 
 
 
-    createUser(user){
-      this.afAuth.createUserWithEmailAndPassword(user.email, user.password).then(userCredential =>{
-           this.newUser = user;
-     
-           userCredential.user.updateProfile({
-             displayName : user.email + ' ' + user.lastName + ' ' + user.firstName
-           });
-     
-           this.insertUserDate(userCredential).then(() =>{
-             this.router.navigate(['/landingpage']);
-           });
+    async createUser(user){
+      return new Promise( resolve => {
+        this.afAuth.createUserWithEmailAndPassword(user.email, user.password).then(userCredential =>{
+            this.newUser = user;
+      
+            userCredential.user.updateProfile({
+              displayName : user.email + ' ' + user.lastName + ' ' + user.firstName
+            });
+      
+            this.insertUserDate(userCredential).then(() =>{
+              this.router.navigate(['/landingpage']);
+            });
+            resolve(user.email);
+        })
+            .catch(error =>{
+              this.eventAuthError.next(error);
+            })
       })
-           .catch(error =>{
-             this.eventAuthError.next(error);
-           })
      }
 
 
