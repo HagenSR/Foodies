@@ -148,6 +148,61 @@ export class FoodService implements OnInit {
 
     })
   }
+
+  addUserProfileInformation(Email: string){
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+
+    docref.get().subscribe(doc => {
+      docref.set({
+        'Weight': 160,
+        'Height': 70,
+        'Smoke': 0,
+        'Exercise': 0,
+        'Drink': 0,
+        'Sex':"male"
+      })
+    })
+  }
+
+  getUserProfileInformation(Email: string): Promise<any[]>{
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+    let output: any[] = [];
+
+    return new Promise(resolve =>
+      docref.get().subscribe((doc) => {
+        if (doc.exists) {
+          output.push(doc.data().Sex)
+          output.push(doc.data().Weight)
+          output.push(doc.data().Height)
+          output.push(doc.data().Smoke)
+          output.push(doc.data().Exercise)
+          output.push(doc.data().Drink)
+          
+
+          resolve(output)
+        } else {
+          console.log("No such document!");
+        }
+      })
+    )
+  }
+
+  editUserProfileInformation(Email: string, newInfo: any[]){
+    var docref = this.db.doc('/ProfileInformation/' + Email);
+
+    docref.get().subscribe(doc => {
+      docref.set({
+        'Sex': newInfo[0],
+        'Weight': newInfo[1],
+        'Height': newInfo[2],
+        'Smoke': newInfo[3],
+        'Exercise': newInfo[4],
+        'Drink': newInfo[5]
+      })
+    })
+  }
+
+
   /* 
   finds a JSON food object based on its name, using REGEX
   */
