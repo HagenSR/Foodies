@@ -71,6 +71,22 @@ export class TrackComponent implements OnInit {
     this.list = [];
   }
 
+  round(){
+    this.water = Math.round(this.water);
+    this.cal  = Math.round(this.cal);
+    this.protein = Math.round(this.protein);
+    this.lipids = Math.round(this.lipids);
+    this.carbs = Math.round(this.carbs);
+    this.fiber = Math.round(this.fiber);
+    this.sugar = Math.round(this.sugar);
+    this.calcium = Math.round(this.calcium);
+    this.sodium  = Math.round(this.sodium);
+    this.sat = Math.round(this.sat);
+    this.mono = Math.round(this.mono);
+    this.poly  = Math.round(this.poly);
+    this.chol = Math.round(this.chol);
+  }
+
   getFoodInfo(dte: string){
     this.setToZero()
     this.afAuth.authState.subscribe(elem => this.fds.getUserFoods(elem.email, dte).then(elem => {
@@ -97,6 +113,7 @@ export class TrackComponent implements OnInit {
         )
       }
       )
+      this.round()
     }
     )
     )
