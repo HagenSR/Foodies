@@ -1,24 +1,20 @@
 
-.listdetail{
-    top: 60px;;
-	left:60px;
-	bottom:10px;
-	right:10px;
+#listdetail{
+    top: 1rem;
+	left:1rem;
+	bottom:10rem;
+	right:10rem;
     position:absolute;
-    width:400px;
-    height:200px;
-    background: purple;
-    float: right;
-    margin-left: 700px;
-    margin-top:415px ;
-   border-color: aqua; 
-   
+    width:40rem;
+    height:200rem;
+    margin-left: 900px;
+    margin-top: 15rem;
 }
 
 .showdetails{
     position: absolute;
-
 }
+
 h3{
     text-align: justify;
     font-family: Georgia, 'Times New Roman', Times, serif;

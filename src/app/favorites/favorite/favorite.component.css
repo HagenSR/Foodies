@@ -12,27 +12,22 @@ button{
 }
 
 .listOfLists{
-    position: relative;;
-    background:yellow;
-  
+    position: relative;
 }
 
-.listOne{
-    top: 60px;;
+#food{
+    margin-top: 5px;
+}
+
+#listOne{
+    top: 60px;
 	left:60px;
 	bottom:10px;
 	right:10px;
     position:absolute;
     width:600px;
-    height:600px;
-    background:red;
-   
-
+    height:70rem;
+    margin-left: 20rem;
+    margin-top: -4.25rem;
 }
 
-.listOne{
-    background-image:url('/assets/welcomeImage.jpg');
-    color:black;
-    background-size:cover;
- 
-} 
