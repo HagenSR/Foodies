@@ -1,7 +1,7 @@
 
 
 #welcome{
-    background-image:url('http://students.cs.ndsu.nodak.edu/~aleggum/angular/Foodies/assets/welcomeImage.jpg');
+    background-image:url('http://students.cs.ndsu.nodak.edu/~seahagen/angular/Foodies/assets/welcomeImage.jpg');
     height: 350px;
     width: 100%;
     color:white;
@@ -11,7 +11,7 @@
 }
 
 .main_header {
-    background-image:url('http://students.cs.ndsu.nodak.edu/~aleggum/angular/Foodies/assets/welcomeImage.jpg');
+    background-image:url('http://students.cs.ndsu.nodak.edu/~seahagen/angular/Foodies/assets/welcomeImage.jpg');
     height: 200px;
     width: 100%;
     color:white;

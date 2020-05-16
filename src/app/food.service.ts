@@ -119,17 +119,29 @@ export class FoodService implements OnInit {
     return new Promise(resolve => docref.get().subscribe((doc) => {
       if (doc.exists) {
         favItem = doc.data().FavFoods
-
-        console.log("Here");
         resolve(favItem);
         console.log(favItem);
       } else {
         console.log("No Such Document");
       }
     }))
-
-
   }
+
+  getMostUsedFoods(Email : string): Promise<any[]>{
+    console.log('here')
+    let docref = this.db.collection('/FoodsEaten/' + Email + "/date/");
+    let usedItem: string[] = [];
+    return new Promise(resolve => docref.get().subscribe((doc) => {
+      console.log('done')
+        doc.forEach(temp => {
+          usedItem = usedItem.concat(temp.data().FoodIDs)
+        })
+        console.log("Food Arrary: " + usedItem)
+        resolve(usedItem)
+    }))
+ 
+  }
+  
 
   RemoveUserFavoriteFood(Email: string, FoodID: string) {
     let date: Date = new Date();

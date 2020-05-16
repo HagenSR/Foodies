@@ -19,7 +19,6 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import {FoodCardComponent} from './food-card/food-card.component';
 import { AuthenticationService } from './auth/authentication.service';
-import { AuthGuard } from './auth/auth.guard';
 import { MostusedfoodsComponent } from './mostusedfoods/mostusedfoods.component';
 
 import { FoodCardSmallComponent } from './food-card-small/food-card-small.component';
@@ -40,7 +39,8 @@ const appRoutes: Routes = [
   { path: 'track', component: TrackComponent },
   { path : 'favorite', component: FavoriteComponent },
   { path: 'favoritedetail/:NDB_No', component:FavoritedetailComponent },
-  { path: 'mostusedfoods', component: MostusedfoodsComponent}
+  { path: 'mostusedfoods', component: MostusedfoodsComponent},
+  { path: '', redirectTo: '/signin', pathMatch: 'full'},
 ];
 
 @NgModule({

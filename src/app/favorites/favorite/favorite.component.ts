@@ -3,13 +3,14 @@ import { FoodService } from 'src/app/food.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {TrackComponent} from 'src/app/track/track.component';
-import { Observable } from 'rxjs';
+
+
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css']
 })
+
 export class FavoriteComponent implements OnInit {
 
   list : any[]=[];
@@ -24,6 +25,7 @@ export class FavoriteComponent implements OnInit {
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.foodService.getMostUsedFoods("goodeats@test.com")
     this.getFavoriteFoodItems();
   
   
