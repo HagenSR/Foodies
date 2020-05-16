@@ -5,6 +5,7 @@
         <div class="form-group">
             <label for="username">Email</label>
             <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <p>use goodeats@test.com for testing</p>
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Email is required</div>
             </div>
@@ -12,6 +13,7 @@
            <div class="form-group">
                <label for="password">Password</label>
                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+               <p>Password: goodeats</p>
                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                    <div *ngIf="f.password.errors.required">Password is required</div>
                </div>
